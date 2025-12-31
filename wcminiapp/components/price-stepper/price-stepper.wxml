@@ -1,0 +1,28 @@
+<view class="wrap">
+  <view
+    class="btn {{isMin ? 'disabled' : ''}}"
+    bindtap="onMinus"
+    hover-class="{{isMin ? '' : 'btnHover'}}"
+  >
+    <view class="sign">−</view>
+    <view class="limit">{{minText}}</view>
+  </view>
+
+  <input
+    class="input"
+    type="digit"
+    value="{{text}}"
+    placeholder="{{placeholder}}"
+    bindinput="onInput"
+    bindblur="onBlur"
+  />
+
+  <view
+    class="btn {{isMax ? 'disabled' : ''}}"
+    bindtap="onPlus"
+    hover-class="{{isMax ? '' : 'btnHover'}}"
+  >
+    <view class="sign">+</view>
+    <view class="limit">{{maxText}}</view>
+  </view>
+</view>

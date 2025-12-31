@@ -1,0 +1,30 @@
+{
+    "pages": [
+        "pages/nearby/nearby",
+        "pages/station/station",
+        "pages/report/report"
+    ],
+
+    "window": {
+        "navigationBarTitleText": "Oil Price",
+        "backgroundTextStyle": "light",
+        "navigationBarBackgroundColor": "#fff",
+        "navigationBarTextStyle": "black",
+        "enablePullDownRefresh": false
+    },
+
+    "permission": {
+        "scope.userLocation": {
+        "desc": "We use your location to show nearby gas stations."
+        }
+    },
+
+    "requiredPrivateInfos": [
+        "getLocation", 
+        "chooseLocation"
+    ],
+
+    "style": "v2",
+
+    "sitemapLocation": "sitemap.json"
+}

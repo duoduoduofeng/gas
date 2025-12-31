@@ -1,0 +1,30 @@
+<view class="page">
+  <view class="header">
+    <view class="title">Report</view>
+    <view class="subtitle">Station: {{stationId}}</view>
+  </view>
+
+  <view class="card">
+    <view class="label">Price</view>
+
+    <price-stepper
+      value="{{price}}"
+      min="{{minPrice}}"
+      max="{{maxPrice}}"
+      step="{{priceStep}}"
+      decimals="{{decimals}}"
+      placeholder="e.g. {{defaultPrice}}"
+      bindchange="onPriceChange"
+    />
+
+    <view wx:if="{{error}}" class="error">{{error}}</view>
+
+    <button
+      class="btn primary"
+      bindtap="onSubmit"
+      disabled="{{submitting}}"
+    >
+      {{submitting ? 'Submitting...' : 'Submit'}}
+    </button>
+  </view>
+</view>

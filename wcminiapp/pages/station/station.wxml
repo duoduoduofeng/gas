@@ -1,0 +1,48 @@
+<view class="page">
+  <view class="headerCard">
+    <view class="titleRow">
+      <view class="name">{{header.name}}</view>
+      <view class="badge {{header.badge}}">{{header.badge}}</view>
+    </view>
+
+    <view class="summary">
+      <view class="metric">
+        <view class="k">Price</view>
+        <view class="v price">{{header.currentPriceText}}</view>
+      </view>
+
+      <view class="metric">
+        <view class="k">Reports</view>
+        <view class="v">{{header.reportCount}}</view>
+      </view>
+
+      <view class="metric">
+        <view class="k">Updated</view>
+        <view class="v">{{header.lastUpdatedText}}</view>
+      </view>
+    </view>
+
+    <view class="actions">
+      <view class="reportBtn" bindtap="onGoReport">Report</view>
+      <view class="refreshWrap" bindtap="onRefresh">
+        <view class="refreshBtn">↻</view>
+      </view>
+    </view>
+  </view>
+
+  <view wx:if="{{loading}}" class="state">Loading...</view>
+  <view wx:if="{{error}}" class="state error">{{error}}</view>
+
+  <view wx:if="{{!loading && !error}}">
+    <view class="sectionTitle">Recent Reports</view>
+
+    <view wx:if="{{reports.length === 0}}" class="state">No reports</view>
+
+    <view wx:for="{{reports}}" wx:key="id" class="reportRow">
+      <view class="left">
+        <view class="priceText">{{item.priceText}}</view>
+        <view class="timeText">{{item.timeText}}</view>
+      </view>
+    </view>
+  </view>
+</view>

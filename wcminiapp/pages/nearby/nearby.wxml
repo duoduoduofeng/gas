@@ -1,0 +1,85 @@
+<view class="page">
+  <view class="header">
+    <view class="title">Nearby</view>
+
+    <view class="controls">
+      <picker mode="selector" range="{{radiusOptions}}" bindchange="onRadiusChange">
+        <view class="pill">Radius: {{radius}} km</view>
+      </picker>
+
+      <view class="refreshWrap" bindtap="onRefresh">
+        <view class="refreshBtn">↻</view>
+      </view>
+    </view>
+  </view>
+
+  <!-- Location bar -->
+  <view class="locationBar">
+    <view class="locationInfo">
+      <view class="locationLabel">Location</view>
+
+      <view wx:if="{{locationStatus === 'ready'}}" class="locationValue">
+        <text wx:if="{{locationSource === 'picked'}}">Chosen</text>
+        <text wx:elif="{{locationSource === 'gps'}}">Current</text>
+        <text wx:else>Current</text>
+
+        <text wx:if="{{locationName}}"> · {{locationName}}</text>
+        <text wx:else> · {{locationCoordText}}</text>
+      </view>
+
+      <view wx:elif="{{locationStatus === 'loading'}}" class="locationValue muted">
+        Getting location...
+      </view>
+
+      <view wx:elif="{{locationStatus === 'denied'}}" class="locationValue muted">
+        Location unavailable
+      </view>
+
+      <view wx:else class="locationValue muted">
+        Location unavailable
+      </view>
+    </view>
+
+    <view class="locationActions">
+      <view class="actionBtn" bindtap="onUseMyLocation">Use my location</view>
+      <view class="actionBtn primary" bindtap="onChooseLocation">Choose location</view>
+    </view>
+  </view>
+
+  <view wx:if="{{loading}}" class="state">Loading...</view>
+  <view wx:if="{{error}}" class="state error">{{error}}</view>
+
+  <view wx:if="{{!loading && !error}}">
+    <view wx:if="{{stations.length === 0}}" class="state">No stations</view>
+
+    <view
+      wx:for="{{stations}}"
+      wx:key="id"
+      class="card"
+      data-id="{{item.id}}"
+      bindtap="onOpenStation"
+    >
+      <view class="cardTop">
+        <view class="name">{{item.name}}</view>
+        <view class="badge {{item.confidence}}">{{item.confidence}}</view>
+      </view>
+
+      <view class="metrics">
+        <view class="metric">
+          <view class="k">Price</view>
+          <view class="v price">{{item.currentPriceText}}</view>
+        </view>
+
+        <view class="metric">
+          <view class="k">Reports</view>
+          <view class="v">{{item.reportCount}}</view>
+        </view>
+
+        <view class="metric">
+          <view class="k">Updated</view>
+          <view class="v">{{item.lastUpdatedText}}</view>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>

@@ -1,0 +1,5 @@
+{
+  "usingComponents": {
+    "price-stepper": "../../components/price-stepper/price-stepper"
+  }
+}
