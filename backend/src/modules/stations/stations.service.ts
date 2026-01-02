@@ -1,9 +1,7 @@
 import { Injectable } from '@nestjs/common';
-// import { Station } from './station.type';
 import { GetStationsDto } from './dto/get-stations.dto';
 import { isWithinRadius } from '../shared/utils/geo';
 import { ReportsService } from '../reports/reports.service';
-// import { PricesService } from '../prices/prices.service';
 import { PrismaService } from '../../database/prisma.service';
 import { PRICING_CONFIG } from '../prices/pricing.config';
 import { filterOutliersByMedian } from '../shared/utils/outlier';
@@ -32,29 +30,6 @@ export class StationsService {
     const filtered = stations.filter(s =>
       isWithinRadius(lat, lng, s.lat, s.lng, radius),
     );
-
-    // keep it simple: for each station, fetch its reports then aggregate
-    // return Promise.all(
-    //   filtered.map(async s => {
-    //     const { reportCount, latest } = await this.reportsService.getWindowStatsByStation(s.id);
-
-    //     const confidence =
-    //       reportCount >= 2 ? 'HIGH' :
-    //       reportCount === 1 ? 'MEDIUM' : 
-    //       'LOW';
-
-    //     return {
-    //       id: s.id,
-    //       name: s.name,
-    //       lat: s.lat,
-    //       lng: s.lng,
-    //       currentPrice: latest?.price ?? null,
-    //       confidence,
-    //       reportCount,
-    //       lastUpdatedAt: latest?.createdAt ?? null,
-    //     };
-    //   }),
-    // );
 
     const stationIds = filtered.map(s => s.id);
     const stats = await this.reportsService.getWindowStatsForStations(stationIds);

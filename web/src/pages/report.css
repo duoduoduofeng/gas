@@ -2,6 +2,7 @@
   padding: 16px;
   background: #f7f9fc;
   min-height: 100vh;
+  box-sizing: border-box;
   font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
 }
 

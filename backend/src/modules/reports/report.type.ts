@@ -2,6 +2,7 @@ export type Report = {
   id: number;
   stationId: number;
   price: number;
-  photoUrl?: string | null;
+  deviceId: string;
+  photoUrl: string | null;
   createdAt: Date;
 };

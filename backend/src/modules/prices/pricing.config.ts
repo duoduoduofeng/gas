@@ -23,8 +23,8 @@ export const PRICING_CONFIG = {
 
   // Anti-spam / rate limit rules
   DEFENSE: {
-    MAX_UPLOAD_TIMES: 3,
-    WINDOW_MINUTES: 10,
+    MAX_UPLOAD_TIMES: 5,
+    WINDOW_MINUTES: 5,
   },
 
   // Deduplication rules

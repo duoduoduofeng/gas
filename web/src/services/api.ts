@@ -18,10 +18,16 @@ function buildQuery(data?: Record<string, any>) {
 }
 
 export async function request<T>({ path, method = "GET", data }: RequestArgs): Promise<T> {
+  // console.log("in request, API_BASE_URL =", import.meta.env.VITE_API_BASE_URL);
+  // console.log("in request, log_level = ", import.meta.env.VITE_LOG_LEVEL);
+  // console.log("MODE =", import.meta.env.MODE);
+  
   const baseUrl = APP_CONFIG.api.baseUrl;
+  // console.log("in request, baseUrl =", baseUrl);
   const url = method === "GET"
     ? `${baseUrl}${path}${buildQuery(data)}`
     : `${baseUrl}${path}`;
+  // console.log("in request, url =", url);
 
   const res = await fetch(url, {
     method,

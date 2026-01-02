@@ -49,8 +49,15 @@ export function clearSelectedLocation(): void {
 }
 
 export async function getCurrentLocation(): Promise<LocationResult> {
+  if (!window.isSecureContext) {
+    const err: any = new Error("GEO_INSECURE_CONTEXT");
+    err.statusCode = 400;
+    throw err;
+  }
+
   if (!navigator.geolocation) {
     const err: any = new Error("GEO_UNSUPPORTED");
+    err.statusCode = 400;
     throw err;
   }
 

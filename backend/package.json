@@ -5,7 +5,8 @@
   "scripts": {
     "start": "node dist/main.js",
     "start:dev": "nest start --watch",
-    "build": "nest build"
+    "build": "nest build",
+    "start:dev:docker": "prisma generate && nest start --watch"
   },
   "dependencies": {
     "@nestjs/common": "^10.0.0",

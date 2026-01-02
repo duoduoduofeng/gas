@@ -1,7 +1,6 @@
 import { Body, Controller, Post, HttpException, HttpStatus, BadRequestException } from '@nestjs/common';
 import { ReportsService } from './reports.service';
 import { CreateReportDto } from './dto/create-report.dto';
-import { Report } from './report.type';
 import { checkRateLimit } from '../shared/utils/rate-limit';
 import { PRICING_CONFIG } from '../prices/pricing.config';
 import { median, isOutlierByMedian } from '../shared/utils/outlier';
@@ -51,14 +50,4 @@ export class ReportsController {
 
     return this.reportsService.create(dto);
   }
-
-
-  // http://localhost:3000/reports?stationId=1
-  // import { Body, Controller, Get, Post, Query, HttpException, HttpStatus } from '@nestjs/common';
-  // replaced by StationsController.Get(':id')
-  // @Get()
-  // async list(@Query('stationId') stationId?: string): Promise<Report[]> {
-  //   if (!stationId) return [];
-  //   return this.reportsService.listByStation(Number(stationId));
-  // }
 }

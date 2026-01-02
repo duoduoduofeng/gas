@@ -1,5 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { Report } from '../reports/report.type';
+// import { Report } from "@prisma/client";
 import { StationPrice, ConfidenceLevel } from './station-price.type';
 
 @Injectable()

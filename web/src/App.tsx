@@ -17,7 +17,9 @@ export default function App() {
     return () => window.removeEventListener("popstate", onPop);
   }, []);
 
-  if (page === "station") return <StationPage />;
-  if (page === "report") return <ReportPage />;
-  return <NearbyPage />;
+  return (
+    <div className="appShell">
+      {page === "station" ? <StationPage /> : page === "report" ? <ReportPage /> : <NearbyPage />}
+    </div>
+  );
 }

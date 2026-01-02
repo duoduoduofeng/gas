@@ -8,5 +8,5 @@ COPY . .
 
 EXPOSE 3000
 
-# "start:dev" means "nest start --watch"
-CMD ["npm", "run", "start:dev"]
+# "start:dev:docker": check in package.json
+CMD ["npm", "run", "start:dev:docker"]

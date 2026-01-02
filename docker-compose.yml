@@ -23,6 +23,7 @@ services:
     volumes:
       - ./backend:/app
       - /app/node_modules
+      - ./certs:/app/certs:ro
     env_file:
       - .env
     environment:
@@ -41,6 +42,7 @@ services:
     volumes:
       - ./web:/app
       - /app/node_modules
+      - ./certs:/app/certs:ro
     env_file:
       - ./web/.env.development
     depends_on:
