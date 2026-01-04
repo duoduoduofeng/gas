@@ -76,7 +76,7 @@ export async function getCurrentLocation(): Promise<LocationResult> {
   };
 }
 
-// Phase 1: use prompt-based coordinate input; replace with map picker in Phase 3
+// use prompt-based coordinate input
 export async function chooseLocation(): Promise<LocationResult> {
   const latStr = window.prompt(
     "Enter latitude (e.g. 49.17):",

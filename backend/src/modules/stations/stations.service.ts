@@ -11,22 +11,22 @@ import { toStationDetailDto } from '../shared/utils/mappers';
 
 @Injectable()
 export class StationsService {
-  // http://localhost:3000/stations?lat=49.17&lng=-123.13
-  // http://localhost:3000/reports?stationId=1
+  // https://localhost:3000/stations?lat=49.17&lng=-123.13
+  // https://localhost:3000/stations/1
   constructor(
     private readonly reportsService: ReportsService,
-    // private readonly pricesService: PricesService,
     private readonly prisma: PrismaService,
   ) {}
 
   async getStations(query: GetStationsDto) {
     const { lat, lng, radius = PRICING_CONFIG.NEARBY.RADIUS } = query;
 
-    // Find nearby stations by lattitude & longitude
+    // Return all stations in db.
     const stations = await this.prisma.station.findMany({
       orderBy: { id: 'asc' },
     });
 
+    // Find nearby stations by lattitude & longitude
     const filtered = stations.filter(s =>
       isWithinRadius(lat, lng, s.lat, s.lng, radius),
     );
@@ -151,58 +151,5 @@ export class StationsService {
       lastUpdatedAt,
       recentReports,
     });
-  }
-
-  // Return all the reports and the latest uploading info.
-  // @Deprecated
-  async getStationByIdV00(stationId: number) {
-    const station = await this.prisma.station.findUnique({
-      where: { id: stationId },
-    });
-
-    if (!station) return null;
-
-    // const { reportCount, latest } = await this.reportsService.getWindowStatsByStation(stationId, 30);
-    const stats = await this.reportsService.getWindowStatsByStationV2(stationId);
-    const recentReports = await this.reportsService.listLatestByStation(stationId);
-
-    let confidence: 'HIGH' | 'MEDIUM' | 'LOW' | 'NONE' = 'NONE';
-    let currentPrice: number | null = null;
-    let lastUpdatedAt: Date | null = null;
-    let reportCount = 0;
-
-    if (stats.countHigh >= PRICING_CONFIG.THRESHOLDS.HIGH) {
-      confidence = 'HIGH';
-      currentPrice = stats.latestHigh?.price ?? null;
-      lastUpdatedAt = stats.latestHigh?.createdAt ?? null;
-      reportCount = stats.countHigh;
-    } else if (stats.countHigh >= PRICING_CONFIG.THRESHOLDS.MEDIUM) {
-      confidence = 'MEDIUM';
-      currentPrice = stats.latestHigh?.price ?? null;
-      lastUpdatedAt = stats.latestHigh?.createdAt ?? null;
-      reportCount = stats.countHigh;
-    } else if (stats.countLow > PRICING_CONFIG.THRESHOLDS.LOW) {
-      confidence = 'LOW';
-      currentPrice = stats.latestLow?.price ?? null;
-      lastUpdatedAt = stats.latestLow?.createdAt ?? null;
-      reportCount = stats.countLow;
-    } else {
-      confidence = 'NONE';
-      currentPrice = null;
-      lastUpdatedAt = null;
-      reportCount = 0;
-    }
-
-    return {
-      id: stationId,
-      name: station.name,
-      lat: station.lat,
-      lng: station.lng,
-      currentPrice,
-      confidence,
-      reportCount,
-      lastUpdatedAt,
-      recentReports,
-    };
   }
 }

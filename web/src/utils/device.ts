@@ -20,6 +20,7 @@ function generateDeviceId() {
 
 export function getOrCreateDeviceId() {
   try {
+    // browser id, if clear cookies, this id will change
     const existing = localStorage.getItem(STORAGE_KEY);
     if (existing && typeof existing === "string") return existing;
 
