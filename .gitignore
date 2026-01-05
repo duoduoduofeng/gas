@@ -13,7 +13,9 @@ pnpm-debug.log*
 .env
 .env.*
 **/.env
+**/.env.*
 !.env.example
+!**/.env.example
 
 # Build / cache
 *.tsbuildinfo
@@ -27,12 +29,11 @@ pnpm-debug.log*
 
 
 # ********** Sections **********
-# Backend (NestJS)
+# Backend
 backend/.nest
 backend/coverage
 
 # Backend: Prisma
-backend/prisma/.env
 backend/prisma/*.log
 backend/prisma/migrations
 
@@ -49,13 +50,9 @@ web/.gitignore
 web/*.json
 web/*.js
 web/*.ts
-web/.env.*
 
 # Frontend: Web (Vite + React)
 web/.vite
-web/.env
-web/.env.*
-!web/.env.example
 
 
 # ********** Other **********
