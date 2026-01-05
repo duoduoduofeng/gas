@@ -40,6 +40,7 @@ backend/prisma/migrations
 wcminiapp/.*
 wcminiapp/project.*
 wcminiapp/sitemap.json
+wcminiapp/pages/nearby.bak
 
 # Frontend: web
 web/public
