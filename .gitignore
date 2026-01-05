@@ -1,0 +1,65 @@
+# ********** Env **********
+# General
+.DS_Store
+Thumbs.db
+.idea
+.vscode
+*.log
+npm-debug.log*
+yarn-debug.log*
+pnpm-debug.log*
+
+# Environment files
+.env
+.env.*
+**/.env
+!.env.example
+
+# Build / cache
+*.tsbuildinfo
+
+# Docker dependencies
+**/node_modules
+**/certs
+
+# Build output
+**/dist
+
+
+# ********** Sections **********
+# Backend (NestJS)
+backend/.nest
+backend/coverage
+
+# Backend: Prisma
+backend/prisma/.env
+backend/prisma/*.log
+backend/prisma/migrations
+
+# Frontend: Wechat Mini Program
+wcminiapp/.*
+wcminiapp/project.*
+wcminiapp/sitemap.json
+
+# Frontend: web
+web/public
+web/src/assets
+web/.gitignore
+web/*.json
+web/*.js
+web/*.ts
+web/.env.*
+
+# Frontend: Web (Vite + React)
+web/.vite
+web/.env
+web/.env.*
+!web/.env.example
+
+
+# ********** Other **********
+# Certificates (never commit)
+certs
+
+# resources
+pics
