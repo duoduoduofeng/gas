@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useState } from "react";
 import APP_CONFIG from "../config/app.config";
-import { initNearby, refreshNearby, useMyLocation, pickLocation } from "../utils/nearby.model";
+import { initNearby, refreshNearby, useMyLocation } from "../utils/nearby.model";
 import type { NearbyStationVM } from "../utils/viewmodel";
 import NearbyView from "./NearbyView";
 import "./nearby.css";
@@ -103,10 +103,44 @@ export default function NearbyPage() {
     });
   }
 
+  useEffect(() => {
+    const onPop = () => {
+      const sp = new URLSearchParams(window.location.search);
+      const page = sp.get("page") || "nearby";
+      if (page !== "nearby") return;
+
+      runWithLoading(async () => {
+        const state = await initNearby({ radius });
+        applyState(state, { devHintOnDenied: true });
+      });
+    };
+
+    window.addEventListener("popstate", onPop);
+    return () => window.removeEventListener("popstate", onPop);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [radius]);
+
   async function onChooseLocation() {
+    // No longer use input lat and lng mannually.
+    // await runWithLoading(async () => {
+    //   const state = await pickLocation({ radius });
+    //   applyState(state);
+    // });
+
+    // But choose on map.
     await runWithLoading(async () => {
-      const state = await pickLocation({ radius });
-      applyState(state);
+      applyState({ error: "" });
+
+      const sp = new URLSearchParams(window.location.search);
+      sp.set("page", "map");
+
+      if (typeof lat === "number" && typeof lng === "number") {
+        sp.set("lat", String(lat));
+        sp.set("lng", String(lng));
+      }
+
+      window.history.pushState({}, "", `${window.location.pathname}?${sp.toString()}`);
+      window.dispatchEvent(new PopStateEvent("popstate"));
     });
   }
 

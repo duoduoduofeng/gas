@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import NearbyPage from "./pages/NearbyPage";
 import StationPage from "./pages/StationPage";
 import ReportPage from "./pages/ReportPage";
+import MapPage from "./pages/MapPage";
 
 function getPage(): string {
   const sp = new URLSearchParams(window.location.search);
@@ -19,7 +20,15 @@ export default function App() {
 
   return (
     <div className="appShell">
-      {page === "station" ? <StationPage /> : page === "report" ? <ReportPage /> : <NearbyPage />}
+      {page === "map" ? (
+        <MapPage />
+      ) : page === "station" ? (
+        <StationPage />
+      ) : page === "report" ? (
+        <ReportPage />
+      ) : (
+        <NearbyPage />
+      )}
     </div>
   );
 }

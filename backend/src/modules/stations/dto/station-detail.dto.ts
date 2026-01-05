@@ -5,6 +5,8 @@ export class StationDetailDto {
   name!: string;
   lat!: number;
   lng!: number;
+  // address?: string;
+  address!: string | null;
 
   currentPrice!: number | null;
   confidence!: 'HIGH' | 'MEDIUM' | 'LOW' | 'NONE';

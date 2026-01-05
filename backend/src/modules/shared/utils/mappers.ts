@@ -25,6 +25,7 @@ export function toStationListItemDto(input: {
   name: string;
   lat: number;
   lng: number;
+  address: string | null;
   currentPrice: number | null;
   confidence: 'HIGH' | 'MEDIUM' | 'LOW' | 'NONE';
   reportCount: number;
@@ -35,6 +36,7 @@ export function toStationListItemDto(input: {
     name: input.name,
     lat: input.lat,
     lng: input.lng,
+    address: input.address ?? null,
     currentPrice: input.currentPrice,
     confidence: input.confidence,
     reportCount: input.reportCount,
@@ -47,6 +49,7 @@ export function toStationDetailDto(input: {
   name: string;
   lat: number;
   lng: number;
+  address: string | null;
   currentPrice: number | null;
   confidence: 'HIGH' | 'MEDIUM' | 'LOW' | 'NONE';
   reportCount: number;
@@ -65,6 +68,7 @@ export function toStationDetailDto(input: {
     name: input.name,
     lat: input.lat,
     lng: input.lng,
+    address: input.address ?? null,
     currentPrice: input.currentPrice,
     confidence: input.confidence,
     reportCount: input.reportCount,

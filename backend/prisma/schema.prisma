@@ -18,6 +18,7 @@ model Station {
   name    String
   lat     Float
   lng     Float
+  address String?
   reports Report[]
 }
 

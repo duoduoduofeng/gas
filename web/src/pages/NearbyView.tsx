@@ -1,5 +1,4 @@
 import type { NearbyStationVM } from "../utils/viewmodel";
-// import "./nearby.css";
 
 type Props = {
   radius: number;
@@ -108,7 +107,10 @@ export default function NearbyView(props: Props) {
               }}
             >
               <div className="cardTop">
-                <div className="name">{item.name}</div>
+                <div className="nameBlock">
+                  <div className="name">{item.name}</div>
+                  {!!item.address && <div className="address">{item.address}</div>}
+                </div>
                 <div className={`badge ${item.confidence}`}>{item.confidence}</div>
               </div>
 

@@ -25,7 +25,10 @@ export default function StationView(props: Props) {
 
       <div className="headerCard">
         <div className="titleRow">
-          <div className="name">{header.name}</div>
+          <div className="nameBlock">
+            <div className="name">{header.name}</div>
+            {!!header.address && <div className="address">{header.address}</div>}
+          </div>
           <div className={`badge ${header.badge}`}>{header.badge}</div>
         </div>
 
